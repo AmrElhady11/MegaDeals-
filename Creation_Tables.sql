@@ -9,11 +9,41 @@ create Table users
     lastname          varchar(60)              null,
     username          varchar(60) unique       not null,
     email             varchar(60) unique       not null,
-    password          varchar(60)              not null check ( password like '^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[a-zA-Z]).{8,}$'), #password should have digits,capital & small chars and more than 7 chars
-    role              varchar(60)                       default 'CUSTOMER',
-    creation_time     timestamp                not null,
-    last_updated_time timestamp                not null
+    password          varchar(60)              not null,
+    role              enum('ADMIN','SELLER','CUSTOMER')                          default 'CUSTOMER',
+    creation_time     timestamp                                                  default now(),
+    last_updated_time timestamp                                                  default now()
 );
+create Table admins
+(
+    id                  integer    primary key   auto_increment,
+    name                varchar(255),
+    permissions         enum('MANAGER','OWNER'),
+    last_login_time     timestamp,
+    user_id             int,
+    CONSTRAINT FK_UserAdmin  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+create Table sellers
+(
+    id                  integer    primary key   auto_increment,
+    name                varchar(255),
+    description         text,
+    phone_number        varchar(50),
+    rating              double                              default  0.0,
+    user_id             int,
+    CONSTRAINT FK_UserSeller  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+create Table customers
+(
+    id                        integer    primary key   auto_increment,
+    name                varchar(255),
+    phone_number              varchar(50),
+    total_orders              int                            default  0,
+    total_delivered_orders    int                            default  0,
+    user_id                   int,
+    CONSTRAINT FK_UserCustomer  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE Table products (
                           id                integer       primary key auto_increment,
                           name              varchar(60)               not null,
@@ -21,11 +51,19 @@ CREATE Table products (
                           production_date   date,
                           expiration_date   date  ,
                           unit_price        double,
-                          quantity          integer ,
+                          stock_quantity    integer ,
                           availability      bool  ,
                           creation_time     timestamp ,
-                          last_updated_time timestamp
+                          last_updated_time timestamp ,
+                          seller_id         int       ,
+                          status           enum('PENDING','APPROVED','REJECTED')         DEFAULT 'PENDING',
+                          approved_by       int,
+                          CONSTRAINT        FK_ProductSeller  FOREIGN KEY (seller_id) REFERENCES sellers(id),
+                          CONSTRAINT        FK_ProductAdmin   FOREIGN KEY (approved_by) REFERENCES admins(id)
+
+
 );
+
 
 CREATE Table cart
 (
