@@ -1,15 +1,11 @@
 package com.MegaDeals.repository;
 
 import com.MegaDeals.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-public interface ProductRepository  {
-
-    Product insert(ProductDetailsEntity productDetails);
-    Product findById(int id);
-    void deleteById(int id);
-    void update(ProductDetailsEntity productDetails);
-    List<Product> findAll();
-    ProductDetailsEntity findProductDetailsById(int id);
 }

@@ -3,45 +3,51 @@
 <head>
     <!-- Import Bootstrap -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<script>
+    function handleCartAction(productId) {
+        const button = document.getElementById('cartButton-' + productId);
+
+        if (!button.dataset.cartAdded) {
+            alert("Product added to cart!");
+            button.dataset.cartAdded = true; // Mark this button as added to cart
+            button.textContent = 'Go to Cart'; // Change the button text
+        } else {
+            window.location.href = '/cart'; // Redirect to cart
+        }
+    }
+</script>
+
 <body>
-<h1>ProductShop</h1>
+<h1>MegaDeals Store</h1>
 <div class="tbl-div">
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
             <th scope="col">Name</th>
-            <th scope="col">Show Details</th>
-            <th scope="col">Add/Update</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${productsList}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
+            <td></td>
+            <td></td>
             <td>
-                <form th:action="@{/showProductDetails(id=${item.id})}" method="post">
-                    <input type="submit" class="btn btn-primary" value="View Details"/>
-                </form>
+                <a class="no-link-style" th:href="@{/showProductDetails/{id}(id=${item.id})}" th:text="${item.name}"></a>
             </td>
+            <td th:text="${item.price}"></td>
             <td>
-                <form th:action="@{/updateProduct}" method="post">
-                    <input type="submit" class="btn btn-warning" value="Add/update Details"/>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/deleteProduct(id=${item.id})}" method="post">
-                    <input type="submit" class="btn btn-danger" value="Delete"/>
-                </form>
+                <button id="cartButton-" + th:text="${item.id}" class="btn btn-primary" onclick="handleCartAction(${item.id})">
+                    Add to Cart
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
-    <form th:action="@{/addProduct}" method="post">
-        <input type="submit" class="btn btn-success" value="Add new Product"/>
-    </form>
 </div>
 </body>
 </html>

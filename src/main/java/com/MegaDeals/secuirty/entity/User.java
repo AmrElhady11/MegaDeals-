@@ -13,25 +13,17 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "firstname")
     private String firstname;
-    @Column(name = "lastname")
     private String lastname;
-    @Column(name = "username")
     private String username;
-    @Column(name = "email")
     private String email;
-    @Column(name = "password")
     private String password;
-    @Transient
-    private String confirmPassword;
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private Role role ;
     @Column(name = "creation_time")
     private  LocalDateTime creationTime;

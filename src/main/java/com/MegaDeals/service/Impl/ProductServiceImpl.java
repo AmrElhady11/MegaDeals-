@@ -1,15 +1,19 @@
 package com.MegaDeals.service.Impl;
 
+import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.ProductRepository;
 import com.MegaDeals.entity.Product;
-import com.MegaDeals.model.ProductDetails;
 import com.MegaDeals.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     private ModelMapper modelMapper;
@@ -21,10 +25,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean addProduct(ProductDetails productDetails) {
+    public boolean addProduct(ProductDto product) {
 
         try {
-            productRepository.insert(mapToProductDetailsEntity(productDetails));
+            productRepository.save(mapToProductEntity(product));
             return true;
         } catch (Exception e) {
             return false;
@@ -32,20 +36,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<com.MegaDeals.model.Product> getAllProduct() {
+    public List<ProductDto> getAllProduct() {
         List<Product> productList = productRepository.findAll();
         if (productList == null || productList.isEmpty()) {
             return List.of();
         }
-        return productList.stream().map(this::mapToProduct).toList();
+        return productList.stream().map(this::mapToProductDto).toList();
     }
 
+
     @Override
-    public boolean updateProduct(ProductDetails productDetails) {
+    public boolean updateProduct(ProductDto product) {
 
         try {
-            productRepository.update(mapToProductDetailsEntity(productDetails));
-            return true;
+            Optional<Product> optionalProduct = productRepository.findById(product.getId());
+
+            Product theProduct = optionalProduct.orElse(null);
+            if (theProduct != null) {
+                productRepository.save(theProduct);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
@@ -53,30 +64,29 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean deleteProduct(int id) {
-        Product existingProduct = productRepository.findById(id);
-        if (existingProduct == null) {
-            return false;
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if (existingProduct.isPresent()) {
+            productRepository.deleteById(id);
+            return true;
         }
-        productRepository.deleteById(id);
-        return true;
+        return false;
     }
 
     @Override
-    public ProductDetails getProductDetails(int id) {
-        ProductDetailsEntity theProduct = productRepository.findProductDetailsById(id);
-
-        return mapToProductDetails(theProduct);
+    public ProductDto getProductById(int id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            return mapToProductDto(productOptional.get());
+        }
+        return null;
     }
 
-    private ProductDetailsEntity mapToProductDetailsEntity(ProductDetails productDetails) {
-        return modelMapper.map(productDetails, ProductDetailsEntity.class);
+
+    private ProductDto mapToProductDto(Product product) {
+        return modelMapper.map(product, ProductDto.class);
+    }
+    private Product mapToProductEntity(ProductDto product) {
+        return modelMapper.map(product, Product.class);
     }
 
-    private com.MegaDeals.model.Product mapToProduct(Product productEntity) {
-        return modelMapper.map(productEntity, com.MegaDeals.model.Product.class);
-    }
-
-    private ProductDetails mapToProductDetails(ProductDetailsEntity productDetailsEntity) {
-        return modelMapper.map(productDetailsEntity, ProductDetails.class);
-    }
 }
