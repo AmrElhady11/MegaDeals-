@@ -1,4 +1,4 @@
-# ProductShop
+# MegaDeals Store
 
 ProductShop is a Web-Based Project built with Java 11, Spring Boot 2.7, and MySQL.
 It provides a comprehensive solution for managing the lifecycle of products in an online marketplace.
@@ -19,9 +19,14 @@ Users can view, update, and delete products with ease through a user-friendly in
 1. Built with
     - Spring Boot 2.7
     - MySQL
-2. Prerequisites
+    - HTML
+    - CSS
+    - Thymleaf
+    - Spring MVC
+3. Prerequisites
     - [Java 11](https://openjdk.java.net/)
     - [Maven](https://maven.apache.org/)
+    
 
 
 ## System Features and Use-Cases
