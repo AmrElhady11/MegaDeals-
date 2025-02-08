@@ -3,9 +3,11 @@ package com.MegaDeals.controller;
 import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,9 +17,18 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/home")
-    public String goToHomePage(Model model) {
-        List<ProductDto> productsList = productService.getAllProduct();
+    public String goToHomePage(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo, Model model) {
+        Page<ProductDto> page = productService.getAllProduct(pageNo);
+
+        List<ProductDto> productsList = page.getContent();
         model.addAttribute("productsList",productsList);
+        model.addAttribute("currentPage",pageNo);
+        model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("totalItems",page.getTotalElements());
+
+        //temprory code
+        boolean loggedIn=true;
+        model.addAttribute("loggedIn",loggedIn);
 
     return "ProjectManagement/HomePage";
     }
