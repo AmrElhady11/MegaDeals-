@@ -7,7 +7,7 @@
     </head>
 <body>
 <h1>Add New Product</h1>
-<form th:action="@{/processAddProduct}" th:object="${productModel}" method="post">
+<form th:action="@{/AddProduct}" th:object="${productModel}" method="post" enctype="multipart/form-data">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -25,6 +25,17 @@
                     <div class="error" th:if="${#fields.hasErrors('expirationDate')}" th:errors="*{expirationDate}"></div>
                 </div>
                 <div class="form-group">
+                    <label for="productionDate">Production Date</label>
+                    <input type="text" id="productionDate" class="form-control" th:field="*{productionDate}" placeholder="dd/mm/yyyy"/>
+                    <div class="error" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="stockQuantity">Quantity in Stock</label>
+                    <input type="text" id="stockQuantity" class="form-control" th:field="*{stockQuantity}" placeholder="stockQuantity"/>
+                    <div class="error" th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}"></div>
+                </div>
+
+                <div class="form-group">
                     <label for="manufacturer">Manufacturer</label>
                     <input type="text" id="manufacturer" class="form-control" th:field="*{manufacturer}" placeholder="Manufacturer"/>
                     <div class="error" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></div>
@@ -35,10 +46,14 @@
                     <div class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
                 </div>
                 <div class="form-group">
-                    <label for="available">Availability</label>
-                    <input type="text" id="available" class="form-control" th:field="*{available}" placeholder="0 or 1"/>
-                    <div class="error" th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></div>
+                    <label for="availability">Availability</label>
+                    <input type="text" id="availability" class="form-control" th:field="*{availability}" placeholder="0 or 1"/>
+                    <div class="error" th:if="${#fields.hasErrors('availability')}" th:errors="*{availability}"></div>
                 </div>
+                <div class="mb-3">
+                <label for="file" class="form-label">Select an Image</label>
+                <input type="file" class="form-control" id="file" name="file" required>
+            </div>
                 <input type="submit" class="btn btn-primary"/>
             </div>
         </div>

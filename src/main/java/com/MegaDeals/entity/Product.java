@@ -33,11 +33,16 @@ public class Product {
     private LocalDateTime creationTime;
     @Column(name = "last_updated_time")
     private LocalDateTime lastUpdateTime;
+    @Lob
+    @Column(columnDefinition = "BLOB")
+    private String image;
+    @Column(name = "image_name")
+    private String imageName;
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller sellerID;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.PENDING;
     @ManyToOne
     @JoinColumn(name = "approved_by")
     private Admin approvedBy;

@@ -28,4 +28,6 @@ public class ProductDto {
     private Seller sellerID;
     private Status status;
     private Admin approvedBy;
+    private String image;
+    private String imageName;
 }

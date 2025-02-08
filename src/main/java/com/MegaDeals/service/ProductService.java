@@ -8,11 +8,10 @@ import java.util.List;
 
 
 public interface ProductService {
-      boolean addProduct(ProductDto product);
       Page<ProductDto> getAllProduct (int pageNo);
       boolean updateProduct(ProductDto productDetails);
       boolean deleteProduct(int id);
       ProductDto getProductById(int id);
-      public void SaveProduct(ProductDto product, MultipartFile file);
+       void addProduct(ProductDto product, MultipartFile file);
 
 }

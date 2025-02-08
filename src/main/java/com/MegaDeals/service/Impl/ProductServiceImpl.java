@@ -1,11 +1,7 @@
 package com.MegaDeals.service.Impl;
 
-import ch.qos.logback.core.util.StringUtil;
 import com.MegaDeals.entity.Image;
-import com.MegaDeals.enums.Status;
-import com.MegaDeals.model.ImageDto;
 import com.MegaDeals.model.ProductDto;
-import com.MegaDeals.repository.ImageRepository;
 import com.MegaDeals.repository.ProductRepository;
 import com.MegaDeals.entity.Product;
 import com.MegaDeals.service.ProductService;
@@ -18,7 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,25 +21,14 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     private ModelMapper modelMapper;
-    private ImageRepository imageRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper,ImageRepository imageRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
-        this.imageRepository = imageRepository;
     }
 
-    @Override
-    public boolean addProduct(ProductDto product) {
 
-        try {
-            productRepository.save(mapToProductEntity(product));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     @Override
     public Page<ProductDto> getAllProduct(int pageNo) {
@@ -93,17 +77,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void SaveProduct(ProductDto product, MultipartFile file) {
-       Product theProduct= productRepository.save(mapToProductEntity(product));
-       Image image = new Image();
-       image.setProductID(theProduct);
-       image.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
+    public void addProduct(ProductDto product, MultipartFile file) {
+
+       product.setImageName(StringUtils.cleanPath(file.getOriginalFilename()));
        try {
-           image.setUrl(Base64.getUrlEncoder().encodeToString(file.getBytes()));
+           product.setImage(Base64.getUrlEncoder().encodeToString(file.getBytes()));
        }
        catch (Exception e) {
            e.printStackTrace();
        }
+        Product theProduct= productRepository.save(mapToProductEntity(product));
 
     }
 
@@ -113,12 +96,6 @@ public class ProductServiceImpl implements ProductService {
     }
     private Product mapToProductEntity(ProductDto product) {
         return modelMapper.map(product, Product.class);
-    }
-    private ImageDto mapToImageDto(Image image) {
-        return modelMapper.map(image, ImageDto.class);
-    }
-    private Image mapToImageEntity(ImageDto image) {
-        return modelMapper.map(image, Image.class);
     }
 
 }
