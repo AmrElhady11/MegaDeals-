@@ -19,6 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String description;
     private String manufacturer;
     @Column(name = "production_date")
     private LocalDate productionDate;

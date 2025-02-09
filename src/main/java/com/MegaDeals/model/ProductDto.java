@@ -17,6 +17,7 @@ public class ProductDto {
 
     private Integer id;
     private String name;
+    private String description;
     private String manufacturer;
     private LocalDate productionDate;
     private LocalDate expirationDate;

@@ -1,11 +1,5 @@
-.dropdown a.nav-link {
-    color: red; /* Change color as needed */
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.dropdown a.nav-link:hover {
-    text-decoration: none;
+.error {
+    color: red;
 }
 
 .table-div {
@@ -15,36 +9,6 @@
     transform: translate(-30%, -30%);
 }
 
-.test
-{
-    color: #20c997;
-}
-.no-link-style {
-    color: inherit; /* Keeps the same text color as surrounding elements */
-    text-decoration: none; /* Removes the underline */
-}
-
-.no-link-style:hover {
-    text-decoration: none; /* Removes the underline on hover */
-    cursor: pointer; /* Optional: Changes cursor to a pointer to indicate it's clickable */
-}
-.pagination{
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-}
-ul li a {
-    text-decoration: none;
-    color: #4CAF50;
-    list-style-type: none;
-}
-
-ul li a:hover {
-    text-decoration: none;
-    list-style-type: none;
-
-}
 .pagination-wrapper {
     display: flex;
     justify-content: center;
