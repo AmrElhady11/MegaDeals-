@@ -90,6 +90,15 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public Page<ProductDto> getAllProductByName(String name,int pageNo) {
+        Sort sort = Sort.by(Sort.Direction.ASC,"name");
+        Pageable pageable = PageRequest.of(pageNo-1,5,sort);
+        Page<Product> productList = productRepository.findByName(name,pageable);
+
+        return productList.map(this::mapToProductDto);
+    }
+
 
     private ProductDto mapToProductDto(Product product) {
         return modelMapper.map(product, ProductDto.class);

@@ -49,6 +49,21 @@ public class ProductController {
 
     return "ProjectManagement/HomePage";
     }
+    @GetMapping("/home/search")
+    public String getSearchResult(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo,@RequestParam(value = "query") String name, Model model) {
+        Page<ProductDto> page = productService.getAllProductByName(name,pageNo);
+        List<ProductDto> productsList = page.getContent();
+        model.addAttribute("productsList",productsList);
+        model.addAttribute("currentPage",pageNo);
+        model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("totalItems",page.getTotalElements());
+
+        //temprory code
+        boolean loggedIn=true;
+        model.addAttribute("loggedIn",loggedIn);
+
+        return "ProjectManagement/HomePage";
+    }
 //    @PostMapping("/showProductDetails")
 //    public String showProductDetails(@RequestParam int id,Model model){
 //       ProductDetails theProduct = productService.getProductDetails(id);

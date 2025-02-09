@@ -14,5 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("select p from Product p where p.status ='APPROVED'")
     Page<Product> findAll(Pageable pageable);
+    @Query("select p from Product p where p.status ='APPROVED' and p.name=:name")
+    Page<Product> findByName(String name, Pageable pageable);
 
 }

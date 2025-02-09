@@ -12,6 +12,6 @@ public interface ProductService {
       boolean updateProduct(ProductDto productDetails);
       boolean deleteProduct(int id);
       ProductDto getProductById(int id);
-       void addProduct(ProductDto product, MultipartFile file);
-
+      void addProduct(ProductDto product, MultipartFile file);
+      Page<ProductDto> getAllProductByName (String name,int pageNo);
 }
