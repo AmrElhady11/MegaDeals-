@@ -8,16 +8,6 @@
     text-decoration: none;
 }
 
-.text-center{
-    font-family:fantasy;
-    color: red;
-}
-.second-part-name{
-    color: blue;
-}
-.navbar-custom {
-    background-color: red;
-}
 .table-div {
     position: absolute;
     top: 70%;
@@ -36,14 +26,6 @@
 
 .no-link-style:hover {
     text-decoration: none; /* Removes the underline on hover */
-    cursor: pointer; /* Optional: Changes cursor to a pointer to indicate it's clickable */
-}
-a{
-    color: inherit; /* Keeps the same text color as surrounding elements */
-    text-decoration: none; /* Removes the underline */
-}
-a:hover{
-    ext-decoration: none; /* Removes the underline on hover */
     cursor: pointer; /* Optional: Changes cursor to a pointer to indicate it's clickable */
 }
 .pagination{
@@ -76,4 +58,13 @@ ul li a:hover {
 }
 .pagination .page-item.disabled a {
     color: #ccc;
+}
+a {
+    text-decoration: none;
+    color: inherit; /* Keeps the same color as surrounding text */
+}
+
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
 }

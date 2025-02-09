@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
 
        product.setImageName(StringUtils.cleanPath(file.getOriginalFilename()));
        try {
-           product.setImage(Base64.getUrlEncoder().encodeToString(file.getBytes()));
+           product.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
        }
        catch (Exception e) {
            e.printStackTrace();
