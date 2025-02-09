@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/NavBar.css}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script th:src="@{/JS/Home.js}" defer></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" style="background-color: red;">
@@ -33,6 +33,7 @@
         <!-- Center: Logo -->
         <div class="navbar-brand mx-auto">
             <h1 class="text-center" ><a th:href="@{/home}"> <span class="first-part">MegaDeals</span> Store</a></h1>
+            <p class="slogan">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Helping you to attain your goals</p>
         </div>
 
         <!-- Right: Search Bar -->
@@ -69,7 +70,14 @@
             </td>
             <td th:text="${item.price}+L.E"></td>
             <td>
+                <button th:id="${'cartButton-' + item.id}"
+                        class="btn btn-primary"
+                        th:onclick="'handleCartAction(' + ${item.id} + ')'" >
+                    Add to Cart
+                </button>
+
             </td>
+
         </tr>
         </tbody>
     </table>
