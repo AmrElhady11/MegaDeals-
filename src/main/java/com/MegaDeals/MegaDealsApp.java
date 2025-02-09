@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AmazonEl8alabaApplication {
+public class MegaDealsApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AmazonEl8alabaApplication.class, args);
+		SpringApplication.run(MegaDealsApp.class, args);
 	}
 
 }
