@@ -34,6 +34,7 @@ public class Product {
     private LocalDateTime creationTime;
     @Column(name = "last_updated_time")
     private LocalDateTime lastUpdateTime;
+    private double rating;
     @Lob
     @Column(columnDefinition = "BLOB")
     private String image;

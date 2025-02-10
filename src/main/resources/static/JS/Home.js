@@ -1,3 +1,8 @@
+
+
+
+
+
 function handleCartAction(productId) {
     const button = document.getElementById('cartButton-' + productId);
 

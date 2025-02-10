@@ -32,3 +32,23 @@ a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
+.cart-btn {
+    background-color: #28a745; /* Green */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.cart-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+.rating {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+.star-rating {
+    font-size: 1.5em;
+    color: #ffcc00;
+}

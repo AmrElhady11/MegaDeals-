@@ -29,6 +29,7 @@ public class ProductDto {
     private Seller sellerID;
     private Status status;
     private Admin approvedBy;
+    private double rating;
     private String image;
     private String imageName;
 }

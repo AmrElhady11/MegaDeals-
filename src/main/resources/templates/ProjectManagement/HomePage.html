@@ -3,6 +3,7 @@
 <head>
     <!-- Import Bootstrap -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/NavBar.css}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,6 +26,8 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileMenu">
                     <li><a class="dropdown-item" href="/profile">View Profile</a></li>
+                    <li><a class="dropdown-item" href="/profile">View My Orders</a></li>
+                    <li><a class="dropdown-item" href="/profile">Go To Cart</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
             </div>
@@ -63,16 +66,13 @@
             </td>
             <td>
                 <a class="no-link-style" th:href="@{/showProductDetails/{id}(id=${item.id})}" th:text="${item.name}"></a>
-                <p>fjdkfjdkfjdkfjdkfjdkfjdkj</p>
-                <p>fjdkfjdkfjdkfjdkfjdkfjdkj</p>
-                <p>fjdkfjdkfjdkfjdkfjdkfjdkj</p>
-                <p>the seller is amr elhady</p>
             </td>
             <td th:text="${item.price}+L.E"></td>
             <td>
                 <button th:id="${'cartButton-' + item.id}"
-                        class="btn btn-primary"
-                        th:onclick="'handleCartAction(' + ${item.id} + ')'" >
+                        class="cart-btn"
+                        th:onclick="'handleCartAction(' + ${item.id} + ')'"
+                        th:onclick ="|window.location.href='/do-stuff'|">
                     Add to Cart
                 </button>
 
