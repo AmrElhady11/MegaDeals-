@@ -9,14 +9,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Integer> {
-  @Query("select c from Cart c where c.status='ACTIVE' and c.customerID=:id")
-    Cart getCartByCustomerID(@Param("id") int id);
-  @Transactional
-  @Modifying
-  @Query(value = "insert into Cart (status,creation_time,last_update_time,cutomer_id) values('ACTIVE',now(),now(),:customerID)",nativeQuery = true)
-  void createNewCart(@Param("customerID") int customerID);
+public interface CartRepository  {
+    Cart getCartByCustomerID( int customerID);
+    void createNewCart( int customerID);
+//  @Query("SELECT c FROM Cart c WHERE c.status = 'ACTIVE' AND c.customerID.id = :id")
+//  List<Cart> getCartByCustomerID(@Param("id") Integer id);
+//  @Transactional
+//  @Modifying
+//  @Query(value = "insert into Cart (status,creation_time,last_update_time,cutomer_id) values('ACTIVE',now(),now(),:customerID)",nativeQuery = true)
+//  void createNewCart(@Param("customerID") int customerID);
 
 
 
