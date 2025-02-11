@@ -4,7 +4,6 @@ import com.MegaDeals.entity.Cart;
 import com.MegaDeals.entity.CartItem;
 import com.MegaDeals.entity.Product;
 import com.MegaDeals.model.CartItemDto;
-import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.CartItemRepository;
 import com.MegaDeals.repository.CartRepository;
 import com.MegaDeals.repository.ProductRepository;
@@ -13,11 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
