@@ -4,6 +4,8 @@ import com.MegaDeals.entity.Seller;
 import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.SellerRepository;
 import com.MegaDeals.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,9 +37,13 @@ public class ProductController {
     }
 
     @GetMapping("/home")
-    public String goToHomePage(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo, Model model) {
+    public String goToHomePage(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo, Model model, HttpServletRequest request) {
         Page<ProductDto> page = productService.getAllProduct(pageNo);
 
+        // For testing Cart page this code will be removed in the following
+        List<ProductDto> cartItemsList = page.getContent();
+        request.getSession().setAttribute("cartItemsList", cartItemsList);
+        /////////////////////////////////////////////////////////////////////
         List<ProductDto> productsList = page.getContent();
         model.addAttribute("productsList",productsList);
         model.addAttribute("currentPage",pageNo);
@@ -50,7 +57,7 @@ public class ProductController {
     return "ProjectManagement/HomePage";
     }
     @GetMapping("/home/search")
-    public String getSearchResult(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo,@RequestParam(value = "query") String name, Model model) {
+    public String getSearchResult(@RequestParam(value = "pageNo",defaultValue ="1") int pageNo, @RequestParam(value = "query") String name, Model model) {
         Page<ProductDto> page = productService.getAllProductByName(name,pageNo);
         List<ProductDto> productsList = page.getContent();
         model.addAttribute("productsList",productsList);

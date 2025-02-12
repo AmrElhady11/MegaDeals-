@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +33,13 @@ public class ProductDto {
     private double rating;
     private String image;
     private String imageName;
+    private int demandQuantity=1 ;
+
+    public  int  getTotalPrice(List<ProductDto> products) {
+        int totalPrice = 0;
+        for (ProductDto product : products) {
+            totalPrice += (product.getPrice()*product.getDemandQuantity());
+        }
+        return totalPrice;
+    }
 }

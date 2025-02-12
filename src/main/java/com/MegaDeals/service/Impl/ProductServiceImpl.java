@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<ProductDto> getAllProductByName(String name,int pageNo) {
         Sort sort = Sort.by(Sort.Direction.ASC,"name");
         Pageable pageable = PageRequest.of(pageNo-1,5,sort);
-        Page<Product> productList = productRepository.findByName(name,pageable);
+        Page<Product> productList = productRepository.findByName('%'+name+'%',pageable);
 
         return productList.map(this::mapToProductDto);
     }
