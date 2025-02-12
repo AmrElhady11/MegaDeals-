@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private String name;
     @Enumerated(EnumType.STRING)
     private Permission permissions ;

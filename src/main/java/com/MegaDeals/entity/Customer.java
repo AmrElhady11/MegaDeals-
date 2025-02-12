@@ -14,11 +14,13 @@ import lombok.NoArgsConstructor;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private String name;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User userId;
+    private int total_orders;
+    private int total_delivered_orders;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User userId;
 }
