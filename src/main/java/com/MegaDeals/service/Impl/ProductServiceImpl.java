@@ -1,6 +1,5 @@
 package com.MegaDeals.service.Impl;
 
-import com.MegaDeals.entity.Image;
 import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.ProductRepository;
 import com.MegaDeals.entity.Product;
