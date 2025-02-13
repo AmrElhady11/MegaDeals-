@@ -20,9 +20,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Enumerated(EnumType.STRING)
-    OrderStatus status;
+    private OrderStatus status;
     @Column(name="total_price")
-    double totalPrice;
+    private double totalPrice;
     @Column(name="order_time")
     private LocalDateTime orderTime;
     @ManyToOne
