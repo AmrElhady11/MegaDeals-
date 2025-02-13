@@ -1,4 +1,4 @@
-package com.MegaDeals.service.Impl;
+package com.MegaDeals.service.impl;
 
 import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.ProductRepository;
