@@ -1,5 +1,6 @@
 package com.MegaDeals.service.impl;
 
+import com.MegaDeals.entity.Order;
 import com.MegaDeals.model.OrderDto;
 import com.MegaDeals.repository.OrderRepository;
 import com.MegaDeals.repository.ProductRepository;
@@ -8,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -23,8 +25,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrders() {
-        return List.of();
+    public List<OrderDto> getOrders(int customerID) {
+        List<Order> orders = orderRepository.findByCustomerId(customerID);
+        if (!orders.isEmpty()) {
+            List<OrderDto> orderDtos = new ArrayList<>();
+            for (Order order : orders) {
+                OrderDto orderDto = modelMapper.map(order, OrderDto.class);
+                orderDtos.add(orderDto);
+            }
+            return orderDtos;
+        }
+            return List.of();
     }
 
     @Override
