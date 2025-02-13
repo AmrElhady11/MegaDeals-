@@ -1,7 +1,9 @@
 package com.MegaDeals.service.impl;
 
 import com.MegaDeals.entity.Order;
+import com.MegaDeals.entity.Product;
 import com.MegaDeals.model.OrderDto;
+import com.MegaDeals.model.ProductDto;
 import com.MegaDeals.repository.OrderRepository;
 import com.MegaDeals.repository.ProductRepository;
 import com.MegaDeals.service.OrderService;
@@ -28,12 +30,17 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getOrders(int customerID) {
         List<Order> orders = orderRepository.findByCustomerId(customerID);
         if (!orders.isEmpty()) {
-            List<OrderDto> orderDtos = new ArrayList<>();
+            List<OrderDto> orderDtoList = new ArrayList<>();
             for (Order order : orders) {
                 OrderDto orderDto = modelMapper.map(order, OrderDto.class);
-                orderDtos.add(orderDto);
+                List<Product> productDtoList = productRepository.getAllProductsByOrderID(order.getId());
+                for (Product product : productDtoList) {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    orderDto.getProducts().add(productDto);
+                }
+                orderDtoList.add(orderDto);
             }
-            return orderDtos;
+            return orderDtoList;
         }
             return List.of();
     }
