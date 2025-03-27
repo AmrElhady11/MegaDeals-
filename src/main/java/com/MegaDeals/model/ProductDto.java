@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
 @Data
@@ -35,7 +36,7 @@ public class ProductDto {
     private String imageName;
     private int demandQuantity=1 ;
 
-    public  int  getTotalPrice(List<ProductDto> products) {
+    public  static int  getTotalPrice(HashSet<ProductDto> products) {
         int totalPrice = 0;
         for (ProductDto product : products) {
             totalPrice += (product.getPrice()*product.getDemandQuantity());

@@ -27,7 +27,7 @@
                 <ul class="dropdown-menu" aria-labelledby="profileMenu">
                     <li><a class="dropdown-item" href="/profile">View Profile</a></li>
                     <li><a class="dropdown-item" href="/profile">View My Orders</a></li>
-                    <li><a class="dropdown-item" href="/profile">Go To Cart</a></li>
+                    <li><a class="dropdown-item" href="/cart">Go To Cart</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
             </div>
@@ -72,6 +72,7 @@
                 <button th:id="${'cartButton-' + item.id}"
                         class="cart-btn"
                         th:onclick="'handleCartAction(' + ${item.id} + ')'"
+
                         >
                     Add to Cart
                 </button>
