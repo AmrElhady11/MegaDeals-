@@ -37,15 +37,9 @@ public class ProductController {
         Page<ProductDto> page = productService.getAllProduct(pageNo);
 
         // For testing Cart page this code will be removed in the following
-        HashSet <ProductDto> cartItemsList =(HashSet <ProductDto>)session.getAttribute("cartItemsList");
+        HashSet <Integer> cartItemsList =(HashSet <Integer>)session.getAttribute("cartItemsList");
         if(cartItemsList == null){
             cartItemsList = new LinkedHashSet<>();
-//        cartItemsList.add(page.getContent().get(0));
-            System.out.println("======================================");
-
-            System.out.println(cartItemsList);
-            System.out.println("======================================");
-
         }
         session.setAttribute("cartItemsList", cartItemsList);
         /////////////////////////////////////////////////////////////////////

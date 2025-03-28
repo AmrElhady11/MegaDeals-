@@ -36,7 +36,9 @@ public class ProductDto {
     private String imageName;
     private int demandQuantity=1 ;
 
-    public  static int  getTotalPrice(HashSet<ProductDto> products) {
+    public  static int  getTotalPrice(List<ProductDto> products) {
+        if(products==null || products.isEmpty())
+            return 0;
         int totalPrice = 0;
         for (ProductDto product : products) {
             totalPrice += (product.getPrice()*product.getDemandQuantity());

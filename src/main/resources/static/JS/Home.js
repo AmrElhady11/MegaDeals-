@@ -27,3 +27,4 @@ function updateQuantity() {
     form.action = url;
     form.submit();
 }
+
